@@ -54,7 +54,7 @@ def collect_rendered_rounds(url, parse_fn, event, category, timeout_ms=14000, sh
     runner = nullcontext(None) if shared_browser is not None else sync_playwright()
     with runner as p:
         try:
-            browser = shared_browser or p.chromium.launch(channel='msedge', headless=True, args=['--disable-extensions'])
+           browser = shared_browser or p.chromium.launch(executable_path='/usr/bin/chromium', headless=True, args=['--no-sandbox', '--disable-extensions'])
         except Exception as ex:
             raise RuntimeError('Could not open Microsoft Edge for round collection: '+str(ex)[:180]) from ex
         try:
